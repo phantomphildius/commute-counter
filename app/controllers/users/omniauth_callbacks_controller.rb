@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user && user.active_for_authentication? && user.persisted?
       flash[:success] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Strava'
-      sign_in_and_redirect @user, event: :authentication
+      sign_in_and_redirect user, event: :authentication
     else
       flash[:error] = 'Unable to sign in!'
       redirect_to root_path

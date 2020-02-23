@@ -1,5 +1,6 @@
+<h2>You've saved <%= @savings_calculator.savings.format %></h2>
 <ul>
-<% @activities.each do |run| %>
+<% @current_user.activities.each do |run| %>
   <li>
     <%= run.id %>
     <%= run.name %>

@@ -1,9 +1,6 @@
 class DashboardsController < ApplicationController
   def index
-    api_client = Strava::Api::Client.new(
-      access_token: current_user.strava_oauth_token
-    )
-
-    @activities = api_client.athlete_activities.select(&:commute)
+    @savings_calculator = SavingsCalculators::CommuteCost.new(current_user)
+    @user = current_user
   end
 end
