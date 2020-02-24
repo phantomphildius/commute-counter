@@ -1,0 +1,5 @@
+  <h2>Input a fare to see how much you've saved</h2>
+  <%= form_with model: @commute_fare, url: commute_fares_path do |f| %>
+    <%= f.text_field :cost %>
+    <%= f.submit "Create" %>
+  <% end %>

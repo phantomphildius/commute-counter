@@ -6,7 +6,7 @@ class SavingsCalculators::CommuteCost
   end
 
   def savings
-    (user_gear_cost + (user_commutes.count * fare_cost)).to_money
+    user_gear_cost + (user_commutes_count * fare_cost)
   end
 
   private
@@ -14,14 +14,14 @@ class SavingsCalculators::CommuteCost
   attr_reader :user
 
   def fare_cost
-    user.commute_fare.cost_cents
+    user.commute_fare.cost
   end
 
-  def user_commutes
-    user.activities.select(&:commute)
+  def user_commutes_count
+    user.activities.select(&:commute).count
   end
 
   def user_gear_cost
-    user.commute_gears.sum(&:cost_cents) * -1
+    user.commute_gears.sum(&:price) * -1
   end
 end

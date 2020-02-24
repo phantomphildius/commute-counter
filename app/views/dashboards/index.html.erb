@@ -1,6 +1,9 @@
 <h2>You've saved <%= @savings_calculator.savings.format %></h2>
+
+<%= link_to 'Add new commute gear', new_commute_gear_path %>
+
 <ul>
-<% @current_user.activities.each do |run| %>
+<% @activities.each do |run| %>
   <li>
     <%= run.id %>
     <%= run.name %>

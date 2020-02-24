@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   root to: "dashboards#index"
 
   resources :dashboards, only: :index
+
+  namespace :commute do
+    resources :fares, only: %i(create new)
+    resources :gears, only: %i(create new)
+  end
 end

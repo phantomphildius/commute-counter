@@ -1,0 +1,8 @@
+  <h2>Add new gear to see your savings</h2>
+  <%= form_with model: @commute_gear, url: commute_gears_path do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <%= f.submit "Create" %>
+  <% end %>
