@@ -16,4 +16,8 @@ Rails.application.routes.draw do
     resources :fares, only: %i(create new)
     resources :gears, only: %i(create new)
   end
+
+  namespace :strava do
+    resources :webhooks, only: %i(index create)
+  end
 end
