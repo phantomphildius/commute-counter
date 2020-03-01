@@ -21,6 +21,8 @@ gem 'money-rails'
 
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
+gem 'google_distance_matrix'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

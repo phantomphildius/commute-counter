@@ -7,6 +7,12 @@
   <li>
     <%= run.id %>
     <%= run.name %>
+    <%= run.distance_in_miles.round(2) %>
+    <%= (run.elapsed_time.to_f / 60).round(2) %>
+    <%= run.start_latlng %>
+    <%= run.end_latlng %>
   </li>
 <% end %>
 </ul>
+
+<%= @time_cost %>
