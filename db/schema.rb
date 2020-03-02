@@ -10,12 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_23_210336) do
+ActiveRecord::Schema.define(version: 2020_03_01_220503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "commute_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "remote_id"
+    t.string "name"
+    t.float "distance_miles"
+    t.bigint "time_elapsed_seconds"
+    t.datetime "activity_date"
+    t.decimal "start_lat"
+    t.decimal "start_lng"
+    t.decimal "end_lat"
+    t.decimal "end_lng"
+    t.uuid "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_commute_activities_on_user_id"
+  end
 
   create_table "commute_fares", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
@@ -32,6 +48,29 @@ ActiveRecord::Schema.define(version: 2020_02_23_210336) do
     t.index ["user_id"], name: "index_commute_gears_on_user_id"
   end
 
+  create_table "commute_transits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "time_elapsed_seconds"
+    t.uuid "commute_activity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commute_activity_id"], name: "index_commute_transits_on_commute_activity_id", unique: true
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "name", default: "", null: false
@@ -45,10 +84,14 @@ ActiveRecord::Schema.define(version: 2020_02_23_210336) do
     t.string "strava_oauth_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "strava_refresh_token"
+    t.datetime "expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "commute_activities", "users"
   add_foreign_key "commute_fares", "users"
   add_foreign_key "commute_gears", "users"
+  add_foreign_key "commute_transits", "commute_activities"
 end

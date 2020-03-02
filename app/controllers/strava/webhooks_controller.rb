@@ -15,7 +15,11 @@ class Strava::WebhooksController < ActionController::Base
     event = Strava::WebhookEvent.new(create_params)
 
     if event.valid?
-      Rails.logger.info("update received for #{event.owner_id} #{event.object_id}")
+      ActivityBuilderJob.perform_later(
+        strava_user_id: event.owner_id,
+        activity_id: event.object_id,
+        calculate_transit_time: true
+      )
     else
       render json: event.errors.details, status: :unprocessable_entity
     end

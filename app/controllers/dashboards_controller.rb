@@ -3,8 +3,7 @@ class DashboardsController < ApplicationController
 
   def index
     @savings_calculator = SavingsCalculators::CommuteCost.new(current_user)
-    @activities = current_user.activities.select(&:commute)
-    @time_cost = SavingsCalculators::TimeCost.new(@activities.first).savings
+    @activities = current_user.activities
   end
 
   private

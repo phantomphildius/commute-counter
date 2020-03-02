@@ -10,5 +10,5 @@ Devise.setup do |config|
 
   config.timeout_in = 10.minutes
 
-  config.omniauth :strava, Rails.application.credentials.strava.fetch(:client_id), Rails.application.credentials.strava.fetch(:secret), scope: 'activity:read'
+  config.omniauth :strava, Rails.application.credentials.strava.fetch(:client_id), Rails.application.credentials.strava.fetch(:secret), scope: 'activity:read_all'
 end

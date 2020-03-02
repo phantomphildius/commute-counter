@@ -23,6 +23,9 @@ gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-r
 
 gem 'google_distance_matrix'
 
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
