@@ -4,7 +4,8 @@ class Commute::Activity < ApplicationRecord
   belongs_to :user
 
   def self.from_remote(activity_id:, user:)
-    remote_activity = Strava::Api::Client.new(access_token: user.strava_oauth_token).activity(activity_id)
+    client = Strava::RefreshableApiClient.new(user).build
+    remote_activity = client.activity(activity_id)
 
     start_lat, start_lng = remote_activity.start_latlng
     end_lat, end_lng = remote_activity.end_latlng

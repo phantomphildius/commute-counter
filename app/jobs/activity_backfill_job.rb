@@ -18,6 +18,7 @@ class ActivityBackfillJob < ApplicationJob
   attr_reader :user
 
   def fetch_remote_commutes_for(user:)
-    Strava::Api::Client.new(access_token: user.strava_oauth_token).athlete_activities.select(&:commute)
+    client = Strava::RefreshableApiClient.new(user).build
+    client.athlete_activities.select(&:commute)
   end
 end

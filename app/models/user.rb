@@ -16,10 +16,14 @@ class User < ApplicationRecord
 
     if user.new_record?
       user.save!
-      ActivityBackfillJob.new(user).delay.perform
+      ActivityBackfillJob.perform_later(user)
       user
     else
       user
     end
+  end
+
+  def strava_oauth_token_expired?
+    Time.zone.now.after?(expires_at)
   end
 end
