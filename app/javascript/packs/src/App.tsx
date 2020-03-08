@@ -22,7 +22,7 @@ interface Response<T> {
   loading: boolean;
 }
 
-function useFetch<T>(url: string, initialValue: [] | null): Response<T> {
+function useFetch<T>(url: string, initialValue: any): Response<T> {
   const client = axios.create({
     responseType: 'json',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' }
