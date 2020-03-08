@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import axios from 'axios';
-import List from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import axios from 'axios';
 
 interface Activity {
   name: string;
   id: string;
-  distance: number;
+  distance_miles: number;
+  time_elapsed_seconds: number;
 }
 
 interface Savings {
@@ -62,13 +63,29 @@ const CommuteCounter: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Box>You have saved {!loadingSavings && savings && savings.cost}</Box>
+      <Box mt={3}>
+        You have saved {!loadingSavings && savings && savings.cost}
+      </Box>
       {!loadingActivities && activities && (
-        <List component="ul">
-          {activities.map(activity => {
-            return <ListItem key={activity.id}>{activity.name}</ListItem>;
-          })}
-        </List>
+        <Grid container>
+          <List>
+            {activities.map(
+              ({ id, name, distance_miles, time_elapsed_seconds }) => {
+                return (
+                  <ListItem key={id}>
+                    <Grid container spacing={2}>
+                      <Grid item>{name}</Grid>
+                      <Grid item>{distance_miles} miles</Grid>
+                      <Grid item>
+                        {(time_elapsed_seconds / 60).toFixed()} minutes
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                );
+              }
+            )}
+          </List>
+        </Grid>
       )}
     </>
   );
