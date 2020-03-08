@@ -1,14 +1,2 @@
-<h2>You've saved <%= @savings_calculator.savings.format %></h2>
-
 <%= link_to 'Add new commute gear', new_commute_gear_path %>
-
-<ul>
-<% @activities.each do |run| %>
-  <li>
-    <%= run.id %>
-    <%= run.name %>
-    <%= run.distance_miles.round(2) %>
-    <%= (run.time_elapsed_seconds.to_f / 60).round(2) %>
-  </li>
-<% end %>
-</ul>
+<%= javascript_pack_tag 'hello_react' %>

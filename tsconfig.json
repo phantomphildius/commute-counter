@@ -10,6 +10,7 @@
     "target": "es5",
     "jsx": "react",
     "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
     "noImplicitThis": true,
     "strictNullChecks": true
   },

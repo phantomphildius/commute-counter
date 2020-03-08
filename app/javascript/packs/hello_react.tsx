@@ -1,15 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-interface Props {
-  name: string;
-}
-
-const Hello: React.FC<Props> = ({ name }) => <div>Hello {name}!</div>;
+import CommuteCounter from './src/CommuteCounter';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <CommuteCounter />,
     document.body.appendChild(document.createElement('div'))
   );
 });

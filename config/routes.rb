@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   namespace :commute do
     resources :fares, only: %i(create new)
     resources :gears, only: %i(create new)
+    resources :activities, only: :index
+    resources :savings, only: :index
   end
 
   namespace :strava do

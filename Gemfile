@@ -19,8 +19,6 @@ gem 'omniauth-strava'
 
 gem 'money-rails'
 
-gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
-
 gem 'google_distance_matrix'
 
 gem 'delayed_job_active_record'

@@ -1,10 +1,7 @@
 class DashboardsController < ApplicationController
   before_action :ensure_user_has_a_commute_fare
 
-  def index
-    @savings_calculator = SavingsCalculators::CommuteCost.new(current_user)
-    @activities = current_user.activities
-  end
+  def index; end
 
   private
 
