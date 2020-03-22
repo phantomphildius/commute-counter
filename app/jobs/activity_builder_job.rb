@@ -5,6 +5,11 @@ class ActivityBuilderJob < ApplicationJob
     user = user_by(strava_user_id: strava_user_id)
     activity = fetch_remote_activity(user: user, activity_id: activity_id)
 
+    if activity.nil?
+      Rails.logger.info 'Non commute activity received'
+      return
+    end
+
     ActiveRecord::Base.transaction do
       activity.save!
 
@@ -22,7 +27,7 @@ class ActivityBuilderJob < ApplicationJob
   end
 
   def fetch_remote_activity(user:, activity_id:)
-    @activity ||= Commute::Activity.from_remote(activity_id: activity_id, user: user)
+    Commute::Activity.from_remote(activity_id: activity_id, user: user)
   end
 
   def build_transit(activity)

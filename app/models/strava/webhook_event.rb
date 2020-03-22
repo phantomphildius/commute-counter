@@ -11,7 +11,7 @@ class Strava::WebhookEvent
   end
 
   validates :object_id, :owner_id, presence: true
-  validates :aspect_type, inclusion: { in: %w(create) }, presence: true
+  validates :aspect_type, inclusion: { in: %w(create update delete) }, presence: true
   validates :object_type, inclusion: { in: %w(activity) }, presence: true
 
   private
