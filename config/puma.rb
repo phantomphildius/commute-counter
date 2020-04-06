@@ -7,7 +7,8 @@ port        ENV.fetch("PORT") { 3000 }
 environment ENV.fetch("RAILS_ENV") { "development" }
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
-workers Integer(ENV.fetch("WEB_CONCURRENCY") { 2 })
+workers(ENV["RACK_ENV"] == "production" ? 2 : 0)
+
 preload_app!
 
 on_worker_boot do

@@ -2,16 +2,13 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import useFetch from '../api';
-import { Activity, Savings } from '../data';
+import { Activity } from '../data';
 import { useActivities } from './ActivitiesProvider';
+import { useSavings } from './SavingsProvider';
 
 const Header: React.FC = () => {
   const { data: activities, loading: loadingActivities } = useActivities();
-  const { data: savings, loading: loadingSavings } = useFetch<Savings>(
-    '/commute/savings',
-    null
-  );
+  const { data: savings, loading: loadingSavings } = useSavings();
 
   const calculateMilesCovered = (activities: Activity[]): string =>
     activities

@@ -8,3 +8,9 @@ export interface Activity {
 export interface Savings {
   cost: string;
 }
+
+export interface Cost {
+  id: string;
+  name: string;
+  price_cents: number;
+}

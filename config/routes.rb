@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :gears, only: %i(create new)
     resources :activities, only: :index
     resources :savings, only: :index
+    resources :costs, only: :index
   end
 
   namespace :strava do
